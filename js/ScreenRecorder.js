@@ -9,7 +9,7 @@ export default class ScreenRecorder {
     }
 
     async start() {
-        if (!await navigator.mediaDevices.getDisplayMedia()) {
+        if (!navigator.mediaDevices.getDisplayMedia) {
             throw new Error('Screen capturing not supported in your browser.');
         }
 
@@ -43,33 +43,13 @@ export default class ScreenRecorder {
         });
 
         const audioTrack = audioStream.getTracks()[0];
+
         videoStream.addTrack(audioTrack);
 
         return videoStream;
     }
 
-    countdown() {
-        DOM.countDownElement.style.display = 'grid';
-
-        let count = constants.COUNTDOWN_DURATION;
-
-        function reduceCount() {
-            DOM.countDownElement.textContent = count;
-            count--;
-
-            if (count >= 0) {
-                setTimeout(reduceCount, 1000);
-            } else {
-                DOM.countDownElement.style.display = 'none';
-            }
-        }
-
-        reduceCount();
-    }
-
     recordStream() {
-        this.countdown();
-
         this.mediaRecorder = new MediaRecorder(this.videoStream, {mimeType: constants.MIME_TYPE});
         const recordedChunks = [];
 
@@ -82,7 +62,7 @@ export default class ScreenRecorder {
             this.showRecordedVideo();
         });
 
-        setTimeout(() => this.mediaRecorder.start(constants.RECORDING_INTERVAL), constants.RECORDING_DELAY);
+        this.mediaRecorder.start(constants.RECORDING_INTERVAL)
     }
 
     stopRecording() {
