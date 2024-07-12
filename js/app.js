@@ -1,7 +1,7 @@
-import ScreenCapture from "./ScreenCapture.js";
+import ScreenRecorder from "./ScreenRecorder.js";
 import {DOM} from "./dom.js";
 
-const screenCapture = new ScreenCapture();
+const screenCapture = new ScreenRecorder();
 
 DOM.startBtn.addEventListener('click', async () => {
   try {

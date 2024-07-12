@@ -1,7 +1,7 @@
 import {constants} from "./constants.js";
 import {DOM} from "./dom.js";
 
-export default class ScreenCapture {
+export default class ScreenRecorder {
   constructor() {
     this.blob = null;
     this.videoStream = null;
